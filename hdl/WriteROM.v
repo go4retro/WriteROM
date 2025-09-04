@@ -36,11 +36,7 @@ reg flag_program;
 reg [7:0]data_out;
 reg [7:0]bdata_out;
 reg [2:0]state;
-reg [14:0]addr;
-reg [18:15]bank;
-reg [11:0]address_latched;
-reg enable_latched;
-reg [1:0]delay;
+reg [18:0]addr;
 
 
 wire clock;
@@ -51,7 +47,7 @@ wire ce_bank;
 wire oe_data;
 wire we_data;
 
-assign clock = 					(delay == 2'h3);
+assign clock = 					(!_ce & !_oe);
 
 
 assign test[0] =              clock;
@@ -65,12 +61,12 @@ assign test[7] =    				_we_flash;
 
 assign flag_config =           (state[2]);
 
-assign ce_addr_lo =           !flag_config & flag_program & (address_latched[10:8] == 0);
-assign ce_addr_mid =          !flag_config & flag_program & (address_latched[10:8] == 1);
-assign ce_bank =              !flag_config & flag_program & (address_latched[10:8] == 2);
+assign ce_addr_lo =           !flag_config & flag_program & (address[10:8] == 0);
+assign ce_addr_mid =          !flag_config & flag_program & (address[10:8] == 1);
+assign ce_bank =              !flag_config & flag_program & (address[10:8] == 2);
 
-assign oe_data =              !flag_config & flag_program & (address_latched[10:8] == 6);
-assign we_data =              !flag_config & flag_program & (address_latched[10:8] == 7);
+assign oe_data =              !flag_config & flag_program & (address[10:8] == 6);
+assign we_data =              !flag_config & flag_program & (address[10:8] == 7);
 
 
 assign bdata =                bdata_out;
@@ -78,42 +74,25 @@ assign data =                 data_out;
 assign _ce_flash =            !(clock & (we_data | oe_data | !flag_program));   //(clock & (flag_program ? (oe_data | we_data) : 1));
 assign _oe_flash = 				!(clock & (oe_data | !flag_program));
 assign _we_flash =            !(clock & we_data);
-assign baddress[18:15] =      bank;
+assign baddress[18:15] =      addr[18:15];
 assign baddress[14:0] =       (flag_program ? addr : address);
-
-always @(posedge fast_clock)
-begin
-	enable_latched <= !_ce & !_oe;
-	address_latched <= address;
-end
-
-always @(posedge fast_clock)
-begin
-	if(!enable_latched)
-		delay <= 0;
-	else
-   begin
-		if(!clock)
-			delay <= delay + 1;
-	end
-end
 
 always @(posedge clock)
 begin
 	if(flag_config)
-		flag_program <= address_latched[0];
+		flag_program <= address[0];
 	else if(ce_addr_lo)
-		addr[7:0] <= address_latched[7:0]; 
+		addr[7:0] <= address[7:0]; 
 	else if(ce_addr_mid)
-		addr[14:8] <= address_latched[6:0]; 
+		addr[15:8] <= address[7:0]; 
 	else if(ce_bank)
-		bank[18:15] <= address_latched[3:0]; 
+		addr[18:16] <= address[2:0]; 
 end
 
 always @(*)
 begin
    if(we_data)
-      bdata_out = address_latched[7:0];
+      bdata_out = address[7:0];
    else
       bdata_out = 8'bz;
 end
@@ -123,9 +102,9 @@ begin
    if(clock & ce_addr_lo)
       data_out = addr[7:0];
    else if(clock & ce_addr_mid)
-      data_out = {0, addr[14:8]};
+      data_out = addr[15:8];
    else if(clock & ce_bank)
-      data_out = {5'b0, bank};
+      data_out = {5'b0, addr[18:16]};
    else if(clock & (we_data | oe_data))
       data_out = bdata;
    else if(clock & flag_program)
@@ -140,20 +119,20 @@ always @(posedge clock)
 begin
    case(state)
       0:
-         if(address_latched[11:0] == 12'h555)
+         if(address[11:0] == 12'h555)
             state <= 1;
       1:
-         if(address_latched[11:0] == 12'haaa)
+         if(address[11:0] == 12'haaa)
             state <= 2;
          else
             state <= 0;
       2:
-         if(address_latched[11:0] == 12'h555)
+         if(address[11:0] == 12'h555)
             state <= 3;
          else
             state <= 0;
       3:
-         if(address_latched[11:0] == 12'h2aa)
+         if(address[11:0] == 12'h2aa)
             state <= 4;
          else
             state <= 0;
