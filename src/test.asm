@@ -43,8 +43,8 @@ write_one
   lda #WRITE
   jsr command
   ldx #0
-  ldy #8
-  lda #0
+  ldy #$00
+  lda #$00
   jsr set_addy
 
   lda #$87
@@ -122,7 +122,7 @@ unlock
   lda base + $555
   lda base + $aaa
   lda base + $555
-  lda base + $2aa
+  lda base + $aa2
   lda base + 1
   rts
 
@@ -130,7 +130,7 @@ lock
   lda base + $555
   lda base + $aaa
   lda base + $555
-  lda base + $2aa
+  lda base + $aa2
   lda base + 0
   rts
 

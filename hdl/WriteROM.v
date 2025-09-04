@@ -61,12 +61,14 @@ assign test[7] =    				_we_flash;
 
 assign flag_config =           (state[2]);
 
-assign ce_addr_lo =           !flag_config & flag_program & (address[10:8] == 0);
-assign ce_addr_mid =          !flag_config & flag_program & (address[10:8] == 1);
-assign ce_bank =              !flag_config & flag_program & (address[10:8] == 2);
+assign ce_addr_lo =           !flag_config & flag_program & (address[11:8] == 0);
+assign ce_addr_mid =          !flag_config & flag_program & (address[11:8] == 1);
+assign ce_bank =              !flag_config & flag_program & (address[11:8] == 2);
 
-assign oe_data =              !flag_config & flag_program & (address[10:8] == 6);
-assign we_data =              !flag_config & flag_program & (address[10:8] == 7);
+// be careful using opcode 5, as it will be triggered during the "knock" sequence (555 portion)
+assign oe_data =              !flag_config & flag_program & (address[11:8] == 6);
+assign we_data =              !flag_config & flag_program & (address[11:8] == 7);
+// be careful using opcode a, as it will be triggered during the "knock" sequence (aaa/aa2 portion)
 
 
 assign bdata =                bdata_out;
@@ -132,7 +134,7 @@ begin
          else
             state <= 0;
       3:
-         if(address[11:0] == 12'h2aa)
+         if(address[11:0] == 12'haa2)
             state <= 4;
          else
             state <= 0;
