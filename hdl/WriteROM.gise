@@ -21,8 +21,106 @@
 
   <sourceproject xmlns="http://www.xilinx.com/XMLSchema" xil_pn:fileType="FILE_XISE" xil_pn:name="WriteROM.xise"/>
 
-  <files xmlns="http://www.xilinx.com/XMLSchema"/>
+  <files xmlns="http://www.xilinx.com/XMLSchema">
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGDBUILD_LOG" xil_pn:name="WriteROM.bld"/>
+    <file xil_pn:fileType="FILE_CMD_LOG" xil_pn:name="WriteROM.cmd_log"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_GYD" xil_pn:name="WriteROM.gyd"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_JEDEC" xil_pn:name="WriteROM.jed"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_LSO" xil_pn:name="WriteROM.lso"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_MFD" xil_pn:name="WriteROM.mfd"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGA" xil_pn:name="WriteROM.nga"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGC" xil_pn:name="WriteROM.ngc"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGD" xil_pn:name="WriteROM.ngd"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGR" xil_pn:name="WriteROM.ngr"/>
+    <file xil_pn:fileType="FILE_PAD_MISC" xil_pn:name="WriteROM.pad"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_PNX" xil_pn:name="WriteROM.pnx"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="WriteROM.prj"/>
+    <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="WriteROM.rpt"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_STX" xil_pn:name="WriteROM.stx"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_REPORT" xil_pn:name="WriteROM.syr"/>
+    <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="WriteROM.tim"/>
+    <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="WriteROM.tspec"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_VM6" xil_pn:name="WriteROM.vm6"/>
+    <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="WriteROM.xml"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST" xil_pn:name="WriteROM.xst"/>
+    <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="WriteROM_build.xml"/>
+    <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="WriteROM_html"/>
+    <file xil_pn:fileType="FILE_XRPT" xil_pn:name="WriteROM_ngdbuild.xrpt"/>
+    <file xil_pn:fileType="FILE_PAD_EXCEL_REPORT" xil_pn:name="WriteROM_pad.csv"/>
+    <file xil_pn:fileType="FILE_HTML" xil_pn:name="WriteROM_summary.html"/>
+    <file xil_pn:fileType="FILE_XRPT" xil_pn:name="WriteROM_xst.xrpt"/>
+    <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="_ngo"/>
+    <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/ngdbuild.xmsgs"/>
+    <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/xst.xmsgs"/>
+    <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="webtalk_pn.xml"/>
+    <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="xlnx_auto_0_xdb"/>
+    <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="xst"/>
+  </files>
 
-  <transforms xmlns="http://www.xilinx.com/XMLSchema"/>
+  <transforms xmlns="http://www.xilinx.com/XMLSchema">
+    <transform xil_pn:end_ts="1757094509" xil_pn:name="TRAN_copyInitialToXSTAbstractSynthesis" xil_pn:start_ts="1757094509">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1757094509" xil_pn:name="TRAN_schematicsToHdl" xil_pn:prop_ck="5929815400732986912" xil_pn:start_ts="1757094509">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1757094519" xil_pn:in_ck="4202758525091101" xil_pn:name="TRANEXT_xstsynthesize_xc9500xl" xil_pn:prop_ck="-3376423180416500412" xil_pn:start_ts="1757094509">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <outfile xil_pn:name="WriteROM.lso"/>
+      <outfile xil_pn:name="WriteROM.ngc"/>
+      <outfile xil_pn:name="WriteROM.ngr"/>
+      <outfile xil_pn:name="WriteROM.prj"/>
+      <outfile xil_pn:name="WriteROM.stx"/>
+      <outfile xil_pn:name="WriteROM.syr"/>
+      <outfile xil_pn:name="WriteROM.xst"/>
+      <outfile xil_pn:name="WriteROM_xst.xrpt"/>
+      <outfile xil_pn:name="_xmsgs/xst.xmsgs"/>
+      <outfile xil_pn:name="webtalk_pn.xml"/>
+      <outfile xil_pn:name="xst"/>
+    </transform>
+    <transform xil_pn:end_ts="1757094519" xil_pn:in_ck="4576804033824211269" xil_pn:name="TRAN_compileBCD2" xil_pn:prop_ck="4784893000052690427" xil_pn:start_ts="1757094519">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1757094527" xil_pn:in_ck="7398490035479927748" xil_pn:name="TRAN_ngdbuild" xil_pn:prop_ck="3931465504876573792" xil_pn:start_ts="1757094519">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <outfile xil_pn:name="WriteROM.bld"/>
+      <outfile xil_pn:name="WriteROM.ngd"/>
+      <outfile xil_pn:name="WriteROM_ngdbuild.xrpt"/>
+      <outfile xil_pn:name="_ngo"/>
+      <outfile xil_pn:name="_xmsgs/ngdbuild.xmsgs"/>
+    </transform>
+    <transform xil_pn:end_ts="1757094551" xil_pn:in_ck="4576804033824203776" xil_pn:name="TRANEXT_vm6File_xc9500xl" xil_pn:prop_ck="2574802773794877691" xil_pn:start_ts="1757094527">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <outfile xil_pn:name="WriteROM.gyd"/>
+      <outfile xil_pn:name="WriteROM.mfd"/>
+      <outfile xil_pn:name="WriteROM.nga"/>
+      <outfile xil_pn:name="WriteROM.pad"/>
+      <outfile xil_pn:name="WriteROM.pnx"/>
+      <outfile xil_pn:name="WriteROM.rpt"/>
+      <outfile xil_pn:name="WriteROM.tim"/>
+      <outfile xil_pn:name="WriteROM.tspec"/>
+      <outfile xil_pn:name="WriteROM.vm6"/>
+      <outfile xil_pn:name="WriteROM.xml"/>
+      <outfile xil_pn:name="WriteROM_build.xml"/>
+      <outfile xil_pn:name="WriteROM_html"/>
+      <outfile xil_pn:name="WriteROM_pad.csv"/>
+    </transform>
+    <transform xil_pn:end_ts="1757094554" xil_pn:in_ck="4576804033824212640" xil_pn:name="TRANEXT_crtProg_xc9500" xil_pn:prop_ck="-6294026017969277533" xil_pn:start_ts="1757094551">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <outfile xil_pn:name="WriteROM.jed"/>
+    </transform>
+    <transform xil_pn:end_ts="1757094551" xil_pn:in_ck="4576804033824212640" xil_pn:name="TRAN_timRpt" xil_pn:prop_ck="111903974446" xil_pn:start_ts="1757094547">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="WarningsGenerated"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+  </transforms>
 
 </generated_project>

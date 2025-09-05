@@ -2,7 +2,7 @@
 
 WriteROM accomplishes the impossible, allowing one to write a ROM in place while installed in a circuit without a write line. No flying leads or pigtails are required. WriteROM allows writing to the FLASH using only read accesses.
 
-In normal operation, WriteROM works just like a normal 28 pin JEDEC ROM. However, once a "knock" sequence of reads are performed on the device, the device enters into a programming mode, where address bits 7-0 are interpreted as the data, and bits 10-8 are considered the "operation". The following operations are supported:
+In normal operation, WriteROM works just like a normal 28 pin JEDEC ROM. However, once a "knock" sequence of reads are performed on the device, the device enters into a programming mode, where address bits 7-0 are interpreted as the data, and bits 11-8 are considered the "operation". The following operations are supported:
 
 | 10:8 | Description                |
 | ---- | -------------------------- |

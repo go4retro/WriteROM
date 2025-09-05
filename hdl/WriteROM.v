@@ -18,6 +18,8 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
+//`DEFINE TESTING
+
 module WriteROM(
                 input [15:0]address, 
                 inout [7:0]data, 
@@ -51,6 +53,7 @@ wire [18:13]bank;
 assign clock = 					(!_ce & !_oe);
 
 
+`ifdef TESTING
 assign test[0] =              clock;
 assign test[1] =              size[0];
 assign test[2] =              size[1];
@@ -58,7 +61,8 @@ assign test[3] =              0;
 assign test[4] =              0;
 assign test[5] =              0;
 assign test[6] =              0;
-assign test[7] =    				_we_flash;          
+assign test[7] =    				_we_flash;
+`endif
 
 assign bank[13] = 				(size >  2 ? addr[13] : address[13]);
 assign bank[14] = 				(size >  1 ? addr[14] : address[14]);
@@ -124,7 +128,16 @@ begin
       data_out = 8'bz;
 end
 
-always @(posedge clock)
+/* 
+	Many CPUs issue a read of FFFF during dead cycles, which	could mess up
+	the sequence if the ROM is installed at top of the memory map.
+	Simplest solution is to ignore FFF in sequence.  
+	(h/t Mike Miller from CoCo Discord)
+ */
+ 
+assign clk_knock = (clock & address[11:0] != 12'hfff);
+
+always @(posedge clk_knock)
 begin
    case(state)
       0:
@@ -141,6 +154,7 @@ begin
          else
             state <= 0;
       3:
+		   /* It was 2aa, but then 2 can't be used as a command */
          if(address[11:0] == 12'haa2)
             state <= 4;
          else
