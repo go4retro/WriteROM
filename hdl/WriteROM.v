@@ -19,8 +19,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module WriteROM(
-                input fast_clock,
-                input [14:0]address, 
+                input [15:0]address, 
                 inout [7:0]data, 
                 input _ce,
                 input _oe,
@@ -29,6 +28,7 @@ module WriteROM(
                 output _we_flash, 
                 output [18:0]baddress, 
                 inout [7:0]bdata,
+					 input [1:0]size,
                 output [7:0]test
                );
 
@@ -46,20 +46,28 @@ wire ce_addr_mid;
 wire ce_bank;
 wire oe_data;
 wire we_data;
+wire [18:13]bank;
 
 assign clock = 					(!_ce & !_oe);
 
 
 assign test[0] =              clock;
-assign test[1] =              0;
-assign test[2] =              0;
+assign test[1] =              size[0];
+assign test[2] =              size[1];
 assign test[3] =              0;
 assign test[4] =              0;
 assign test[5] =              0;
 assign test[6] =              0;
 assign test[7] =    				_we_flash;          
 
-assign flag_config =           (state[2]);
+assign bank[13] = 				(size >  2 ? addr[13] : address[13]);
+assign bank[14] = 				(size >  1 ? addr[14] : address[14]);
+assign bank[15] = 				(size >  0 ? addr[15] : address[15]);
+assign bank[16] = 				addr[16];
+assign bank[17] = 				addr[17];
+assign bank[18] = 				addr[18];
+
+assign flag_config =          (state[2]);
 
 assign ce_addr_lo =           !flag_config & flag_program & (address[11:8] == 0);
 assign ce_addr_mid =          !flag_config & flag_program & (address[11:8] == 1);
@@ -73,11 +81,10 @@ assign we_data =              !flag_config & flag_program & (address[11:8] == 7)
 
 assign bdata =                bdata_out;
 assign data =                 data_out;
-assign _ce_flash =            !(clock & (we_data | oe_data | !flag_program));   //(clock & (flag_program ? (oe_data | we_data) : 1));
+assign _ce_flash =            !(clock & (we_data | oe_data | !flag_program));
 assign _oe_flash = 				!(clock & (oe_data | !flag_program));
 assign _we_flash =            !(clock & we_data);
-assign baddress[18:15] =      addr[18:15];
-assign baddress[14:0] =       (flag_program ? addr : address);
+assign baddress[18:0] =       (flag_program ? addr[18:0] : {bank , address[12:0]});
 
 always @(posedge clock)
 begin
